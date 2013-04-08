@@ -123,6 +123,8 @@ gimp_image_undo (GimpImage *image)
   g_return_val_if_fail (private->pushing_undo_group == GIMP_UNDO_GROUP_NONE,
                         FALSE);
 
+  // FIXME: transfer across OSX
+
   gimp_image_undo_pop_stack (image,
                              private->undo_stack,
                              private->redo_stack,
@@ -142,6 +144,8 @@ gimp_image_redo (GimpImage *image)
 
   g_return_val_if_fail (private->pushing_undo_group == GIMP_UNDO_GROUP_NONE,
                         FALSE);
+
+  // FIXME: transfer across OSX
 
   gimp_image_undo_pop_stack (image,
                              private->redo_stack,
@@ -386,6 +390,13 @@ gimp_image_undo_push (GimpImage     *image,
     name = gimp_undo_type_to_name (undo_type);
 
   {
+  // FIXME: transfer data across to PLO_SERVER using OSC, with liblo
+  // /plo/gimp/action/ (s action, s type, i id, ... args ...)
+  // action_class = "AddLayer" or whatnot
+  // type = "do"/"undo"/"redo"
+  // id = unique identifier for this specific action
+  // args, extra data depending on the action_class
+    
     GString *str = g_string_new ("");
     char *tmpname = g_strdup (name);
     char *t;
