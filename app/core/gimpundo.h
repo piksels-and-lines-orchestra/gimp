@@ -60,6 +60,10 @@ struct _GimpUndo
 
   TempBuf          *preview;
   guint             preview_idle_id;
+
+  guint             id;     /* Unique ID for this undo action. Allows to find action from different do/undo/redo messages  */
+  /* KeyValueList metadata. IDEA: Could be used to attach arbitrary extra data for transporting across OSC, and allow more fine-grained control.
+ * For now, just store a OSC message or arguments, using liblo. Then  */
 };
 
 struct _GimpUndoClass
