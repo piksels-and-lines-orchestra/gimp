@@ -399,21 +399,12 @@ gimp_image_undo_push (GimpImage     *image,
     
     GString *str = g_string_new ("");
     char *tmpname = g_strdup (name);
-    char *t;
-    for (t = tmpname; *t; t++)
-      {
-        switch (*t)
-          {
-            case '\'': case ' ': case '&': case '"': case '\\': *t = '_'; break;
-            default:
-              break;
-          }
-      }
-    char *url = "10.0.1.23:2342";
-    if (getenv ("PLO_URL"))
-      url = getenv ("PLO_URL");
 
-    g_string_printf (str, "echo %s ; curl 'http://%s/GIMP/%s' 2>&1 > /dev/null &", tmpname, url, tmpname);
+    char *url = "127.0.0.1:57120";
+    if (getenv ("PLO_SERVER"))
+      url = getenv ("PLO_SERVER");
+
+    g_string_printf (str, "echo action=%s ; plo-send-action.py 'gimp' '%s' 2>&1 > /dev/null &", tmpname, tmpname);
     system (str->str);
     g_free (tmpname);
     g_string_free (str, TRUE);
