@@ -648,7 +648,7 @@ mosaic_dialog (GimpDrawable *drawable)
 
   scale_data = gimp_scale_entry_new (GTK_TABLE (table), 0, row++,
                                      _("Tile _size:"), SCALE_WIDTH, 5,
-                                     mvals.tile_size, 5.0, 100.0, 1.0, 10.0, 1,
+                                     mvals.tile_size, 5.0, 512.0, 1.0, 10.0, 1,
                                      TRUE, 0, 0,
                                      NULL, NULL);
   g_signal_connect (scale_data, "value-changed",
